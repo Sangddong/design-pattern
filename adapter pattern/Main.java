@@ -1,12 +1,11 @@
 public class Main {
     public static void main(String[] args) {
-        Cafe cafe = new Cafe();
+        OrderService orderService = new OrderService();
 
-        CoffeeMachine newMachine = new NewCoffeeMachine();
-        cafe.makeCoffee(newMachine);
+        orderService.checkout(new CardPaymentService(), 5000);
 
-        OldCoffeePot oldPot = new OldCoffeePot();
-        CoffeeMachine adaptedPot = new CoffeePotAdapter(oldPot);
-        cafe.makeCoffee(adaptedPot);
+        PaymentService oldPgPayment =
+                new OldPaymentGatewayAdapter(new OldPaymentGatewayClient(), "CAFE001");
+        orderService.checkout(oldPgPayment, 5000);
     }
 }
